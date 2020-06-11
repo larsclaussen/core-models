@@ -1,0 +1,21 @@
+version: "3.5"
+
+services:
+
+  core:
+    build:
+      context: ./
+      target: core # Multistage build target
+    image: coremodel:latest
+    command: python manage.py runserver 0.0.0.0:8000
+    # You need to use --name api for local dev with run:
+    #   docker-compose run -p 8000:8000 --name api api bash
+    #
+    # command: ["echo", "Note: no command, this is only for running tests."]
+    environment:
+      - DJANGO_SETTINGS_MODULE=core_models.settings
+    volumes:
+      - ./:/code
+    ports:
+      - "8000:8000"
+
