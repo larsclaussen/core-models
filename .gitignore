@@ -108,5 +108,5 @@ ENV/
 .idea/
 
 # sqlite database
-*.sqlite
+# *.sqlite
 *.spatialite

@@ -12,6 +12,7 @@ def get_db():
         db.close()
 
 
+# dev function
 def get_connection_node(node_id: int):
     db = next(get_db())
     return db.query(models.ConnectionNode).filter(models.ConnectionNode.id == node_id).first()
@@ -20,10 +21,9 @@ def get_connection_node(node_id: int):
 def _create_db():
     conn = engine.connect()
     conn.execute(select([func.InitSpatialMetaData()]))
-    models.Base.metadata.create_all(bind=engine)
 
 
 def create_template_db():
-    conn = engine.connect()
-    conn.execute(select([func.InitSpatialMetaData()]))
-    models.Base.metadata.create_all(bind=engine)
+    _create_db()
+    # TODO enable once the models are define or run with alembic
+    # models.Base.metadata.create_all(bind=engine)
